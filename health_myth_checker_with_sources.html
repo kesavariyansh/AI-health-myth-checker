@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6655df">
+<title>Health Myth Checker — India</title>
+<style>
+:root{--purple:#6655df;--purple2:#8174f1;--ink:#19234f;--muted:#64708d;--green:#229b65;--red:#d84e5b;--amber:#b87912;--bg:#f6f7ff;--line:#e4e7f5}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 5%,#e6eaff 0 110px,transparent 112px),radial-gradient(circle at 96% 18%,#e4e9ff 0 150px,transparent 152px),var(--bg);min-height:100vh}
+.wrap{max-width:1050px;margin:auto;padding:24px 16px 44px}.topbar{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:13px 18px;box-shadow:0 8px 25px #303b7810;margin-bottom:22px}.logo{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#fff1a8;font-size:25px}.brand{font-weight:850;font-size:1.05rem}.subbrand{color:var(--muted);font-size:.83rem}.badge{margin-left:auto;background:#efedff;color:#5142c7;border-radius:999px;padding:8px 12px;font-weight:750;font-size:.8rem}
+.hero{text-align:center;padding:16px 0 22px}.eyebrow{display:inline-block;background:#eeebff;color:#5444c8;border-radius:999px;padding:7px 13px;font-weight:800;font-size:.82rem}.hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;margin:16px 0 10px;letter-spacing:-1.3px}.hero h1 span{color:var(--purple)}.hero p{margin:0 auto;color:var(--muted);max-width:600px;line-height:1.6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}.panel{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 16px 36px #303b7810;min-width:0}.panel-head{padding:16px 20px;color:white;background:linear-gradient(110deg,#6655df,#8a7cf4);font-weight:800;display:flex;align-items:center;gap:10px}.panel-head.green{background:linear-gradient(110deg,#21965e,#40b77a)}.panel-body{padding:22px}.prompt{text-align:center;font-size:1.2rem;font-weight:800;margin:4px 0 16px}.hint{font-size:.9rem;color:var(--muted);text-align:center;margin:-5px 0 16px}
+textarea{width:100%;min-height:125px;resize:vertical;border:2px solid #cbd0eb;border-radius:17px;padding:15px;font:inherit;color:var(--ink);outline:none;transition:border .2s,box-shadow .2s}textarea:focus{border-color:var(--purple);box-shadow:0 0 0 4px #6655df1c}.actions{display:flex;gap:10px;margin-top:13px}.btn{border:0;border-radius:13px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;transition:transform .15s,opacity .15s}.btn:active{transform:scale(.98)}.primary{background:var(--purple);color:white;flex:1}.secondary{background:#f0efff;color:#5043c7}.examples{margin-top:18px}.examples-title{font-size:.83rem;font-weight:800;color:var(--muted);margin-bottom:9px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid #e2defe;background:#faf9ff;color:#5145bd;border-radius:999px;padding:7px 10px;font-size:.8rem;cursor:pointer}.chip:hover{background:#efedff}
+.result-empty{text-align:center;padding:25px 8px;color:var(--muted)}.bulb{font-size:3rem;margin-bottom:8px}.result-empty strong{display:block;color:var(--ink);font-size:1.12rem;margin-bottom:6px}.result{display:none}.status{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 12px;font-weight:850;font-size:.88rem;margin-bottom:14px}.status.false{background:#fff0f0;color:#b83242}.status.true{background:#e9f8ef;color:#167346}.status.unverified{background:#fff5df;color:#98610a}.result h2{font-size:1.2rem;line-height:1.4;margin:0 0 10px}.result p{line-height:1.65;margin:8px 0}.factbox{background:#eaf9ef;border:1px solid #c9efd6;border-radius:16px;padding:15px;margin-top:14px}.factbox b{color:#167346;display:block;margin-bottom:5px}.sourcebox{margin-top:12px;padding:14px;border:1px solid #dce5ff;border-radius:15px;background:#f5f7ff}.sourcebox b{display:block;font-size:.9rem;margin-bottom:6px}.sourcebox a{color:#5142c7;font-weight:800;overflow-wrap:anywhere}.sourcecaveat{font-size:.78rem;color:var(--muted);line-height:1.45;margin-top:6px}.matchnote{font-size:.8rem;color:var(--muted);margin-top:13px}.loading{display:none;text-align:center;padding:35px 10px}.spinner{width:42px;height:42px;border:5px solid #e6e2ff;border-top-color:var(--purple);border-radius:50%;margin:0 auto 12px;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.blink{animation:blink 1s steps(2,start) infinite}@keyframes blink{to{visibility:hidden}}.disclaimer{font-size:.8rem;color:var(--muted);line-height:1.55;text-align:center;margin:22px auto 0;max-width:820px}.footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:14px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.wrap{padding:14px 12px 30px}.panel-body{padding:18px}.badge{display:none}.hero{padding-top:10px}.actions{flex-direction:column}.secondary{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar"><div class="logo">💡</div><div><div class="brand">Health Myth Checker</div><div class="subbrand">India • Simple, evidence-aware health information</div></div><div class="badge">🇮🇳 70-MYTH DATABASE</div></header>
+  <section class="hero"><span class="eyebrow">MYTH • FACT • AWARENESS</span><h1>Question the myth.<br><span>Know the facts.</span></h1><p>Type a health claim in your own words. The checker looks for matching keywords in its built-in 70-myth database and gives a simple explanation.</p></section>
+  <main class="grid">
+    <section class="panel">
+      <div class="panel-head">⭐ Ask a health question</div>
+      <div class="panel-body">
+        <div class="prompt">What health myth have you heard?</div><div class="hint">Try a claim from food, home remedies, infections, medicines, fitness or general health.</div>
+        <textarea id="question" aria-label="Health myth question" placeholder="Example: Does lemon water burn belly fat?"></textarea>
+        <div class="actions"><button class="btn primary" id="checkBtn">Check this claim →</button><button class="btn secondary" id="clearBtn">Clear</button></div>
+        <div class="examples"><div class="examples-title">TRY ONE OF THESE</div><div class="chips" id="chips"></div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="panel-head green">✓ Your answer</div>
+      <div class="panel-body">
+        <div class="result-empty" id="empty"><div class="bulb">📝</div><strong>Your answer appears here</strong><span>Enter a claim and tap “Check this claim”.</span></div>
+        <div class="loading" id="loading"><div class="spinner"></div><strong class="blink">Checking the database…</strong></div>
+        <div class="result" id="result" aria-live="polite"><div class="status" id="status"></div><h2 id="matched"></h2><p id="explanation"></p><div class="factbox"><b>✓ What the evidence says</b><span id="fact"></span></div><div class="sourcebox" id="sourcebox"><b>🔎 Reliable source to read</b><a id="sourceLink" href="#" target="_blank" rel="noopener noreferrer">Open reference</a><div class="sourcecaveat" id="sourceCaveat">Related official health guidance. It may not directly test this exact claim.</div></div><div class="matchnote" id="matchnote"></div></div>
+      </div>
+    </section>
+  </main>
+  <p class="disclaimer"><b>Health note:</b> This is a keyword-based awareness tool, not a medical diagnosis or a live medical search. “Unverified” means the database does not have enough reliable evidence to confirm the claim. For symptoms, emergencies, or medication decisions, consult a qualified healthcare professional.</p>
+  <div class="footer">Built for awareness • No login • Your question stays in this page • Sources are external official health references</div>
+</div>
+<script>
+const myths = [
+{n:1,c:"Food & Nutrition",m:"Lemon water burns belly fat.",s:"FALSE",f:"Lemon water can help with hydration, but it does not directly burn belly fat. Sustainable weight management depends on overall eating patterns, activity and other factors.",k:["lemon water","belly fat","lemon","burns fat","burn fat"]},
+{n:2,c:"Food & Nutrition",m:"Jaggery is always healthier than white sugar.",s:"FALSE",f:"Both contain sugars. Jaggery may contain small amounts of minerals, but it is not sugar-free and should still be consumed in moderation.",k:["jaggery","white sugar","brown sugar","gur","sugar free"]},
+{n:3,c:"Food & Nutrition",m:"Eating rice every day causes diabetes.",s:"FALSE",f:"Rice alone does not automatically cause diabetes. Risk depends on several factors, including genetics, activity, portions and overall dietary pattern.",k:["rice","diabetes","rice every day","eating rice"]},
+{n:4,c:"Food & Nutrition",m:"Bananas at night cause colds.",s:"FALSE",f:"Common colds are caused by viruses, not by eating bananas at night.",k:["banana","bananas","at night","cold"]},
+{n:5,c:"Food & Nutrition",m:"Milk and fish together cause vitiligo or white skin patches.",s:"FALSE",f:"There is no convincing scientific evidence that eating milk and fish together causes vitiligo.",k:["milk and fish","fish and milk","white patches","vitiligo"]},
+{n:6,c:"Food & Nutrition",m:"Ghee is always bad for the heart.",s:"FALSE",f:"Ghee contains saturated fat, and too much saturated fat can raise LDL cholesterol. Overall amount and dietary pattern matter.",k:["ghee","heart","saturated fat"]},
+{n:7,c:"Food & Nutrition",m:"Sugarcane juice detoxifies the liver.",s:"FALSE",f:"The liver processes substances in the body. Sugarcane juice is not a proven liver detox treatment.",k:["sugarcane juice","detoxifies liver","liver detox","detox"]},
+{n:8,c:"Food & Nutrition",m:"Coconut water always replaces ORS during severe diarrhoea.",s:"FALSE",f:"Properly prepared oral rehydration solution (ORS) is formulated to replace water and salts lost during diarrhoea. Severe dehydration needs medical care.",k:["coconut water","ors","diarrhoea","diarrhea","oral rehydration"]},
+{n:9,c:"Food & Nutrition",m:"Curd at night causes coughs and colds.",s:"FALSE",f:"Curd does not cause viral respiratory infections. Individual food sensitivities may differ, but colds are caused by viruses.",k:["curd at night","yogurt at night","cough","curd","cold"]},
+{n:10,c:"Food & Nutrition",m:"Hot water melts body fat.",s:"FALSE",f:"Water temperature does not melt body fat. Weight change depends on longer-term energy balance and other factors.",k:["hot water","warm water","melts fat","body fat"]},
+{n:11,c:"Traditional Remedies",m:"Turmeric milk cures every infection.",s:"FALSE",f:"Turmeric milk may be soothing, but it is not a proven cure for every bacterial or viral infection.",k:["turmeric milk","haldi milk","infection"]},
+{n:12,c:"Traditional Remedies",m:"Neem juice prevents all diseases.",s:"FALSE",f:"Neem has not been shown to prevent all diseases, and consuming neem products can cause harmful effects.",k:["neem juice","neem","all diseases"]},
+{n:13,c:"Traditional Remedies",m:"Tulsi guarantees protection against respiratory infections.",s:"FALSE",f:"Tulsi cannot guarantee protection against respiratory infections. Do not use it as a substitute for recommended prevention or care.",k:["tulsi","respiratory","breathing infection"]},
+{n:14,c:"Traditional Remedies",m:"Toothpaste safely treats pimples.",s:"FALSE",f:"Toothpaste can irritate skin. Products designed for acne are more appropriate.",k:["toothpaste","pimples","pimple","acne"]},
+{n:15,c:"Traditional Remedies",m:"Ginger tea kills cold viruses.",s:"FALSE",f:"Ginger tea may soothe a throat, but it has not been shown to eliminate the viruses that cause common colds.",k:["ginger tea","cold virus","common cold","ginger"]},
+{n:16,c:"Traditional Remedies",m:"Steam inhalation is always safe for children.",s:"FALSE",f:"Hot steam can cause serious burns, especially in children. Safer symptom-relief options should be discussed with a clinician or pharmacist.",k:["steam inhalation","steam","blocked nose","children"]},
+{n:17,c:"Traditional Remedies",m:"Garlic can replace prescribed blood-pressure medicines.",s:"FALSE",f:"Garlic cannot reliably replace prescribed treatment. Do not stop or change blood-pressure medicines without medical advice.",k:["garlic","blood pressure","medicine","medication"]},
+{n:18,c:"Traditional Remedies",m:"Natural remedies never cause side effects.",s:"FALSE",f:"Natural products can cause side effects, contamination problems and interactions with medicines.",k:["natural remedies","natural products","side effects","herbal"]},
+{n:19,c:"Traditional Remedies",m:"Turmeric paste prevents infection in every wound.",s:"UNVERIFIED",f:"Turmeric paste is not an established treatment for every wound. Clean wounds appropriately and seek medical advice for deep, dirty or infected wounds.",k:["turmeric paste","wound","wounds","infection"]},
+{n:20,c:"Traditional Remedies",m:"Bitter gourd juice permanently cures diabetes.",s:"FALSE",f:"Bitter gourd is not a proven cure for diabetes. Monitoring and prescribed treatment remain important.",k:["bitter gourd","karela","diabetes cure","permanently cures diabetes"]},
+{n:21,c:"Hygiene & Infections",m:"Wet hair causes a cold.",s:"FALSE",f:"Colds are caused by respiratory viruses, not wet hair.",k:["wet hair","cold"]},
+{n:22,c:"Hygiene & Infections",m:"Mosquitoes breed only in dirty water.",s:"FALSE",f:"Some mosquitoes, including those that transmit dengue, can breed in clean, stagnant water.",k:["mosquito","dirty water","stagnant water","breed"]},
+{n:23,c:"Hygiene & Infections",m:"HIV spreads through sharing food or utensils.",s:"FALSE",f:"HIV does not spread through ordinary food sharing, shared utensils or casual contact.",k:["hiv","sharing food","utensils","shared food"]},
+{n:24,c:"Hygiene & Infections",m:"Tuberculosis spreads through handshakes or ordinary touching.",s:"FALSE",f:"Infectious TB usually spreads through the air, not through handshakes or ordinary physical contact.",k:["tuberculosis","tb","handshake","touching"]},
+{n:25,c:"Hygiene & Infections",m:"Every mosquito bite causes malaria or dengue.",s:"FALSE",f:"Only mosquitoes carrying the relevant pathogen can transmit malaria or dengue.",k:["mosquito bite","malaria","dengue"]},
+{n:26,c:"Hygiene & Infections",m:"Boiling water removes every harmful chemical.",s:"FALSE",f:"Boiling kills many germs but does not remove every chemical contaminant, salt or heavy metal.",k:["boiling water","boil water","chemical","contaminant"]},
+{n:27,c:"Hygiene & Infections",m:"Hand sanitiser means you never need soap and water.",s:"FALSE",f:"Soap and water are especially important when hands are visibly dirty. Sanitiser is useful in many other situations.",k:["hand sanitiser","hand sanitizer","soap and water","handwashing"]},
+{n:28,c:"Hygiene & Infections",m:"Sharing a meal with someone who has TB automatically infects you.",s:"FALSE",f:"TB is primarily spread through the air. Sharing food does not automatically infect someone.",k:["sharing a meal","meal","tb","tuberculosis"]},
+{n:29,c:"Hygiene & Infections",m:"A person without symptoms cannot spread any infection.",s:"FALSE",f:"Some infections can spread before symptoms appear or when a person has no noticeable symptoms.",k:["without symptoms","no symptoms","spread infection","asymptomatic"]},
+{n:30,c:"Hygiene & Infections",m:"Antibiotics prevent every infection after exposure.",s:"FALSE",f:"Antibiotics work against certain bacteria, not viruses. Preventive use is appropriate only in specific medical situations.",k:["antibiotics","prevent infection","after exposure"]},
+{n:31,c:"Fever, Illness & Medicines",m:"Every fever requires antibiotics.",s:"FALSE",f:"Many fevers are caused by viruses, which antibiotics do not treat. The cause and symptoms guide treatment.",k:["fever","antibiotics"]},
+{n:32,c:"Fever, Illness & Medicines",m:"Antibiotics cure dengue.",s:"FALSE",f:"Dengue is caused by a virus, so antibiotics do not treat the dengue virus.",k:["antibiotics","dengue"]},
+{n:33,c:"Fever, Illness & Medicines",m:"Green mucus always means a bacterial infection.",s:"FALSE",f:"Mucus colour alone cannot reliably tell whether an infection is bacterial or viral.",k:["green mucus","green phlegm","mucus","bacterial infection"]},
+{n:34,c:"Fever, Illness & Medicines",m:"You can stop antibiotics as soon as you feel better.",s:"FALSE",f:"Follow your prescriber's instructions and consult them before changing or stopping treatment.",k:["stop antibiotics","feel better","antibiotics course"]},
+{n:35,c:"Fever, Illness & Medicines",m:"Extra paracetamol makes fever disappear faster without risk.",s:"FALSE",f:"Too much paracetamol can cause severe liver damage. Follow the label and professional advice.",k:["paracetamol","acetaminophen","extra dose","liver damage"]},
+{n:36,c:"Fever, Illness & Medicines",m:"Vaccines cause the diseases they prevent in everyone.",s:"FALSE",f:"Most vaccine side effects are mild and temporary. Vaccine types differ, and serious reactions are uncommon.",k:["vaccines","vaccine","cause disease","vaccination"]},
+{n:37,c:"Fever, Illness & Medicines",m:"Healthy people do not need vaccines.",s:"FALSE",f:"Vaccination helps protect healthy people from preventable infections. Recommendations depend on age, health and vaccine history.",k:["healthy people","vaccines","need vaccines"]},
+{n:38,c:"Fever, Illness & Medicines",m:"Injections are always more effective than tablets.",s:"FALSE",f:"Effectiveness depends on the medicine, condition and route of administration. Injections are not automatically better.",k:["injections","injection","tablets","pills"]},
+{n:39,c:"Fever, Illness & Medicines",m:"Every fever in a child can safely be treated at home.",s:"FALSE",f:"Some fevers need urgent assessment, especially in very young infants or when warning signs occur.",k:["child fever","fever in a child","baby fever","children"]},
+{n:40,c:"Fever, Illness & Medicines",m:"Antibiotics are useful for every sore throat.",s:"FALSE",f:"Many sore throats are viral. Antibiotics are useful only for certain bacterial infections.",k:["sore throat","antibiotics","throat pain"]},
+{n:41,c:"Weight Loss & Fitness",m:"Sweating more means burning more body fat.",s:"FALSE",f:"Sweating cools the body. Quick weight loss after heavy sweating is mainly water loss, not proof of fat loss.",k:["sweating","sweat","body fat","burn fat"]},
+{n:42,c:"Weight Loss & Fitness",m:"Skipping meals is the best way to lose weight.",s:"FALSE",f:"Skipping meals is not necessary for weight loss and may not be sustainable. Eating patterns should fit individual needs.",k:["skipping meals","skip meals","lose weight"]},
+{n:43,c:"Weight Loss & Fitness",m:"Sit-ups directly remove belly fat.",s:"FALSE",f:"Sit-ups strengthen abdominal muscles but do not selectively remove fat from the belly.",k:["sit ups","sit-ups","belly fat","abdominal"]},
+{n:44,c:"Weight Loss & Fitness",m:"Walking is useless for weight loss.",s:"FALSE",f:"Regular brisk walking supports health and can contribute to weight management.",k:["walking","brisk walking","weight loss"]},
+{n:45,c:"Weight Loss & Fitness",m:"Warm water after meals prevents fat storage.",s:"FALSE",f:"Water temperature does not prevent the body from storing excess energy.",k:["warm water","after meals","fat storage"]},
+{n:46,c:"Weight Loss & Fitness",m:"Women who lift weights always become excessively muscular.",s:"FALSE",f:"Strength training can improve strength and fitness. Large muscle gains require specific training and time.",k:["women","lift weights","muscular","weightlifting"]},
+{n:47,c:"Weight Loss & Fitness",m:"You must join a gym to stay fit.",s:"FALSE",f:"Walking, cycling, dancing, sports and home workouts can all improve fitness.",k:["gym","stay fit","home workout","exercise"]},
+{n:48,c:"Weight Loss & Fitness",m:"Muscle turns into fat when you stop exercising.",s:"FALSE",f:"Muscle and fat are different tissues. Inactivity may reduce muscle mass while body fat increases.",k:["muscle turns into fat","muscle into fat","stop exercising"]},
+{n:49,c:"Weight Loss & Fitness",m:"Detox drinks remove all toxins from the body.",s:"FALSE",f:"The liver and kidneys perform important roles in processing and eliminating waste. Detox drinks are not proven to remove all toxins.",k:["detox drinks","toxins","detox"]},
+{n:50,c:"Weight Loss & Fitness",m:"Thin people are always healthier than people with larger bodies.",s:"FALSE",f:"Body size alone cannot determine overall health. Many factors contribute to a person's health.",k:["thin people","body size","larger bodies","healthy"]},
+{n:51,c:"Skin, Hair & Personal Care",m:"Shaving makes hair grow back thicker and darker.",s:"FALSE",f:"Shaving does not change hair thickness, colour or growth rate; the blunt tip can simply feel coarser.",k:["shaving","shave","hair thicker","darker hair"]},
+{n:52,c:"Skin, Hair & Personal Care",m:"Plucking one grey hair causes several more grey hairs.",s:"FALSE",f:"Each hair grows from its own follicle. Plucking one hair does not make nearby hairs turn grey.",k:["grey hair","gray hair","plucking","white hair"]},
+{n:53,c:"Skin, Hair & Personal Care",m:"Sunscreen is unnecessary on cloudy days.",s:"FALSE",f:"Ultraviolet rays can penetrate clouds. Sun protection may still be needed on cloudy days.",k:["sunscreen","cloudy days","uv rays","sun protection"]},
+{n:54,c:"Skin, Hair & Personal Care",m:"Fair skin is always healthier than dark skin.",s:"FALSE",f:"Skin colour does not determine a person's overall health or worth.",k:["fair skin","dark skin","skin colour","skin color"]},
+{n:55,c:"Skin, Hair & Personal Care",m:"Lemon juice is a safe treatment for dark spots.",s:"FALSE",f:"Lemon juice can irritate skin and may increase sensitivity to sunlight. Use evidence-based skin care.",k:["lemon juice","dark spots","pigmentation"]},
+{n:56,c:"Skin, Hair & Personal Care",m:"Drinking more water alone cures acne.",s:"FALSE",f:"Hydration supports general health, but acne may need suitable skincare or medical treatment.",k:["water","acne","pimples"]},
+{n:57,c:"Skin, Hair & Personal Care",m:"Hair oil can cure every type of hair loss.",s:"FALSE",f:"Oils may condition hair but cannot treat every cause of hair loss. Treatment depends on the cause.",k:["hair oil","hair loss","hair fall"]},
+{n:58,c:"Skin, Hair & Personal Care",m:"Dandruff always means poor hygiene.",s:"FALSE",f:"Dandruff can be associated with scalp conditions and yeast activity; it is not simply a sign of poor hygiene.",k:["dandruff","poor hygiene","scalp"]},
+{n:59,c:"Skin, Hair & Personal Care",m:"Lemon juice safely removes dandruff.",s:"UNVERIFIED",f:"Lemon juice is not an established dandruff treatment and may irritate the scalp.",k:["lemon juice","dandruff","scalp"]},
+{n:60,c:"Skin, Hair & Personal Care",m:"Natural skin-lightening remedies are always safe.",s:"FALSE",f:"Natural ingredients can cause irritation, allergies or worsen pigmentation. Test claims carefully and avoid harsh applications.",k:["skin lightening","fairness","natural skin","lightening remedies"]},
+{n:61,c:"Diabetes, Heart & General Health",m:"Eating sugar is the only cause of diabetes.",s:"FALSE",f:"Diabetes has multiple contributing factors, including genetics, insulin resistance and lifestyle. Sugar alone is not the only cause.",k:["sugar","cause of diabetes","diabetes"]},
+{n:62,c:"Diabetes, Heart & General Health",m:"Only people with obesity develop diabetes.",s:"FALSE",f:"People at different body weights can develop diabetes. Risk depends on several factors.",k:["obesity","overweight","diabetes"]},
+{n:63,c:"Diabetes, Heart & General Health",m:"Avoiding sweets permanently cures diabetes.",s:"FALSE",f:"Avoiding sweets alone does not guarantee a cure. Diabetes management may require monitoring, lifestyle changes and medication.",k:["avoiding sweets","cures diabetes","diabetes cure"]},
+{n:64,c:"Diabetes, Heart & General Health",m:"People with diabetes must never eat mangoes or bananas.",s:"FALSE",f:"Many people with diabetes can include fruit in suitable portions as part of an individualised eating plan.",k:["mangoes","mango","bananas","diabetes fruit"]},
+{n:65,c:"Diabetes, Heart & General Health",m:"High blood pressure always causes headaches.",s:"FALSE",f:"High blood pressure often has no noticeable symptoms. Measuring blood pressure is the reliable way to check it.",k:["high blood pressure","headaches","hypertension"]},
+{n:66,c:"Diabetes, Heart & General Health",m:"Every heart attack causes severe chest pain.",s:"FALSE",f:"Symptoms can include breathlessness, sweating, nausea or less obvious discomfort. Seek emergency help for suspected heart attack.",k:["heart attack","chest pain","breathlessness","nausea"]},
+{n:67,c:"Diabetes, Heart & General Health",m:"Young adults cannot develop heart disease.",s:"FALSE",f:"Heart disease can affect young adults too, particularly when risk factors are present.",k:["young adults","heart disease","young people"]},
+{n:68,c:"Diabetes, Heart & General Health",m:"Normal-weight people cannot have high cholesterol.",s:"FALSE",f:"Cholesterol is influenced by genetics, diet and other factors, not body weight alone.",k:["normal weight","cholesterol","high cholesterol"]},
+{n:69,c:"Diabetes, Heart & General Health",m:"Cancer is always inherited from parents.",s:"FALSE",f:"Many cancers arise from genetic changes acquired during life. Only a portion of cancers are linked to inherited mutations.",k:["cancer","inherited","hereditary","parents"]},
+{n:70,c:"Diabetes, Heart & General Health",m:"Feeling healthy means you never need preventive health checks.",s:"FALSE",f:"Some conditions have no early symptoms. Recommended screening depends on age, history and individual risk.",k:["feeling healthy","health checks","screening","preventive check"]}
+];
+
+const $ = id => document.getElementById(id);
+const question = $("question");
+const chips = ["Lemon water burns belly fat","Milk and fish cause white patches","Antibiotics cure dengue","Wet hair causes a cold","Sunscreen on cloudy days","Sugar is the only cause of diabetes"];
+chips.forEach(t=>{const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=t;b.addEventListener("click",()=>{question.value=t;question.focus()});$("chips").appendChild(b)});
+
+function normalise(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9\s-]/g," ").replace(/-/g," ").replace(/\s+/g," ").trim()}
+const stop = new Set(["is","are","the","a","an","does","do","can","will","always","every","all","myth","fact","true","false","it","to","of","for","in","on","and","or","with","from","that","this","you","your","cause","causes","causing","really","actually","i","heard","about","health"]);
+function tokens(s){return normalise(s).split(" ").filter(w=>w.length>2&&!stop.has(w))}
+function score(query,item){
+ const q=normalise(query), qt=tokens(query); let best=0;
+ for(const raw of item.k){const key=normalise(raw);if(!key)continue;if(q.includes(key))best=Math.max(best, 5+key.split(" ").length);
+ const kt=tokens(key);if(kt.length){let hit=kt.filter(w=>qt.includes(w)).length;let ratio=hit/kt.length;let qratio=hit/Math.max(qt.length,1);let sc=ratio*3+qratio;if(hit>=2|| (kt.length===1&&hit===1))best=Math.max(best,sc)}}
+ const mt=tokens(item.m);let hits=mt.filter(w=>qt.includes(w)).length;if(hits>=2)best=Math.max(best,1.5+hits/mt.length*2);
+ return best;
+}
+// Official, publicly accessible health references. These are related topic references,
+// not a claim that every page directly tested the exact wording of every myth.
+const sourceByCategory = {
+ "Food & Nutrition": {label:"WHO — Healthy diet", url:"https://www.who.int/news-room/fact-sheets/detail/healthy-diet"},
+ "Traditional Remedies": {label:"NCCIH — Natural products and health claims", url:"https://www.nccih.nih.gov/health/know-science"},
+ "Hygiene & Infections": {label:"WHO — Health topics and infectious diseases", url:"https://www.who.int/health-topics"},
+ "Fever, Illness & Medicines": {label:"CDC — Antibiotic use and appropriate treatment", url:"https://www.cdc.gov/antibiotic-use/about/index.html"},
+ "Weight Loss & Fitness": {label:"NIDDK — Nutrition and physical activity myths", url:"https://www.niddk.nih.gov/health-information/weight-management/myths-nutrition-physical-activity"},
+ "Skin, Hair & Personal Care": {label:"American Academy of Dermatology — Skin care", url:"https://www.aad.org/public/everyday-care/skin-care-basics"},
+ "Diabetes, Heart & General Health": {label:"WHO — Health topics", url:"https://www.who.int/health-topics"}
+};
+const specificSources = {
+ 3:{label:"NIDDK — Diabetes overview",url:"https://www.niddk.nih.gov/health-information/diabetes/overview"},
+ 4:{label:"CDC — About the common cold",url:"https://www.cdc.gov/common-cold/about/index.html"},
+ 5:{label:"NHS — Vitiligo",url:"https://www.nhs.uk/conditions/vitiligo/"},
+ 7:{label:"NCCIH — Evaluating health information",url:"https://www.nccih.nih.gov/health/know-science/finding-and-evaluating-online-resources"},
+ 8:{label:"WHO — Oral rehydration salts",url:"https://www.who.int/publications/i/item/WHO-FCH-CAH-06.1"},
+ 14:{label:"American Academy of Dermatology — Acne",url:"https://www.aad.org/public/diseases/acne"},
+ 16:{label:"NHS — Steam inhalation burn warning",url:"https://www.royaldevon.nhs.uk/news/nhs-and-british-burn-association-issue-public-safety-warning-steam-inhalation-causes-burns/"},
+ 17:{label:"American Heart Association — High blood pressure",url:"https://www.heart.org/en/health-topics/high-blood-pressure"},
+ 22:{label:"WHO — Mosquito-borne diseases",url:"https://www.who.int/europe/news-room/questions-and-answers/item/public-health-advice-on-mosquito-borne-diseases"},
+ 23:{label:"CDC — How HIV spreads",url:"https://www.cdc.gov/hiv/causes/index.html"},
+ 24:{label:"WHO — Tuberculosis",url:"https://www.who.int/news-room/fact-sheets/detail/tuberculosis"},
+ 25:{label:"WHO — Dengue and severe dengue",url:"https://www.who.int/news-room/fact-sheets/detail/dengue-and-severe-dengue"},
+ 26:{label:"US EPA — Emergency disinfection of drinking water",url:"https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"},
+ 27:{label:"WHO — Hand hygiene",url:"https://www.who.int/health-topics/hand-hygiene"},
+ 30:{label:"CDC — Antibiotic do's and don'ts",url:"https://www.cdc.gov/antibiotic-use/about/index.html"},
+ 32:{label:"WHO — Dengue and severe dengue",url:"https://www.who.int/news-room/fact-sheets/detail/dengue-and-severe-dengue"},
+ 33:{label:"CDC — Antibiotic do's and don'ts",url:"https://www.cdc.gov/antibiotic-use/about/index.html"},
+ 35:{label:"NHS — Paracetamol for adults",url:"https://www.nhs.uk/medicines/paracetamol-for-adults/"},
+ 36:{label:"WHO — Vaccine safety",url:"https://www.who.int/news-room/questions-and-answers/item/vaccines-and-immunization-vaccine-safety"},
+ 39:{label:"NHS — Fever in children",url:"https://www.nhs.uk/conditions/fever-in-children/"},
+ 40:{label:"CDC — Antibiotic do's and don'ts",url:"https://www.cdc.gov/antibiotic-use/about/index.html"},
+ 51:{label:"American Academy of Dermatology — Hair and scalp care",url:"https://www.aad.org/public/everyday-care/hair-scalp-care"},
+ 53:{label:"CDC — Sun safety",url:"https://www.cdc.gov/skin-cancer/sun-safety/index.html"},
+ 58:{label:"American Academy of Dermatology — Dandruff",url:"https://www.aad.org/public/everyday-care/hair-scalp-care/scalp/dandruff"},
+ 64:{label:"NHS — Diabetes and diet",url:"https://www.nhs.uk/conditions/type-2-diabetes/food-and-keeping-active/"},
+ 65:{label:"American Heart Association — High blood pressure myths",url:"https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/common-high-blood-pressure-myths"},
+ 66:{label:"American Heart Association — Heart attack symptoms",url:"https://www.heart.org/en/health-topics/heart-attack/warning-signs-of-a-heart-attack"},
+ 69:{label:"National Cancer Institute — The genetics of cancer",url:"https://www.cancer.gov/about-cancer/causes-prevention/genetics"},
+ 70:{label:"MedlinePlus — Evaluating health information",url:"https://medlineplus.gov/evaluatinghealthinformation.html"}
+};
+function getSource(item){return specificSources[item.n] || sourceByCategory[item.c] || {label:"WHO — Health topics",url:"https://www.who.int/health-topics"}}
+
+function check(){
+ const q=question.value.trim();if(!q){question.focus();question.setCustomValidity("Please type a health claim first.");question.reportValidity();question.setCustomValidity("");return}
+ $("empty").style.display="none";$("result").style.display="none";$("loading").style.display="block";$("checkBtn").disabled=true;
+ setTimeout(()=>{
+  const ranked=myths.map(m=>({m,sc:score(q,m)})).sort((a,b)=>b.sc-a.sc);
+  const top=ranked[0];$("loading").style.display="none";$("checkBtn").disabled=false;
+  if(!top||top.sc<1.5){$("result").style.display="block";$("status").className="status unverified";$("status").textContent="⚠ UNVERIFIED — NOT FOUND";$("matched").textContent="We couldn't confidently match this claim."; $("explanation").textContent="This wording did not match a myth in the current database. Try using a key phrase such as “lemon water”, “dengue”, “hair loss” or “blood pressure”."; $("fact").textContent="No conclusion can be made from this search alone. This does not mean the claim is true or false."; const fallback=getSource({n:0,c:"Hygiene & Infections"}); $("sourceLink").href=fallback.url; $("sourceLink").textContent=fallback.label; $("sourceCaveat").textContent="General official health reference. It does not verify the unmatched claim directly."; $("matchnote").textContent="Database contains "+myths.length+" claims. Try rephrasing with fewer, clearer words.";return}
+  const m=top.m;$("result").style.display="block";$("status").className="status "+(m.s==="FALSE"?"false":m.s==="TRUE"?"true":"unverified");$("status").textContent=m.s==="FALSE"?"✕ FALSE":m.s==="TRUE"?"✓ TRUE":"⚠ UNVERIFIED";
+  $("matched").textContent="Matched myth #"+m.n+": "+m.m;$("explanation").textContent="Category: "+m.c+". This is the closest match found in the local keyword database.";
+  $("fact").textContent=m.f;const src=getSource(m);$("sourceLink").href=src.url;$("sourceLink").textContent=src.label;$("sourceCaveat").textContent="Related reliable reference—not necessarily a study of this exact claim. Open it and check the relevant topic."; $("matchnote").textContent="Keyword match is an estimate, not an AI diagnosis or a live source check. If the result seems unrelated, try rephrasing your question.";
+ },650);
+}
+$("checkBtn").addEventListener("click",check);
+$("clearBtn").addEventListener("click",()=>{question.value="";$("loading").style.display="none";$("result").style.display="none";$("empty").style.display="block";$("checkBtn").disabled=false;question.focus()});
+question.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter")check()});
+</script>
+</body>
+</html>
